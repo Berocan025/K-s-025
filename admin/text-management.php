@@ -24,12 +24,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_text'])) {
     $text_value = $_POST['text_value']; // HTML içerebileceği için clean kullanmıyoruz
     
     try {
-        $stmt = $pdo->prepare("UPDATE site_texts SET text_value = ?, updated_at = datetime('now') WHERE id = ?");
+        // Önce text_key'i al
+        $stmt = $pdo->prepare("SELECT text_key FROM site_texts WHERE id = ?");
+        $stmt->execute([$text_id]);
+        $text_key = $stmt->fetchColumn();
         
-        if ($stmt->execute([$text_value, $text_id])) {
+        if ($text_key) {
+            // site_texts tablosunu güncelle
+            $stmt = $pdo->prepare("UPDATE site_texts SET text_value = ?, updated_at = datetime('now') WHERE id = ?");
+            $stmt->execute([$text_value, $text_id]);
+            
+            // Aynı zamanda settings tablosunu da güncelle (geriye uyumluluk için)
+            $stmt = $pdo->prepare("UPDATE settings SET setting_value = ? WHERE setting_key = ?");
+            $stmt->execute([$text_value, $text_key]);
+            
+            // Eğer settings'te yoksa ekle
+            $stmt = $pdo->prepare("INSERT OR IGNORE INTO settings (setting_key, setting_value) VALUES (?, ?)");
+            $stmt->execute([$text_key, $text_value]);
+            
             $success_message = 'Metin başarıyla güncellendi! (Developer: BERAT K)';
         } else {
-            $error_message = 'Güncelleme başarısız!';
+            $error_message = 'Metin bulunamadı!';
         }
     } catch(PDOException $e) {
         $error_message = 'Veritabanı hatası: ' . $e->getMessage();

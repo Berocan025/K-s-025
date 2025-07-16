@@ -197,6 +197,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['install_features'])) {
         echo "<li>✅ Kapsamlı site metin yönetimi</li>";
         echo "</ul>";
         echo "<p>Artık admin panelinizdeki yeni menülerden bu özellikleri kullanabilirsiniz!</p>";
+        echo "<div style='margin-top: 20px;'>";
+        echo "<a href='fix_content_sections.php' class='btn' style='background: #e74c3c; color: white; margin: 5px; text-decoration: none; padding: 10px 15px; border-radius: 5px;'>🔧 İçerik Bölümlerini Düzelt</a>";
+        echo "<a href='fix_text_management.php' class='btn' style='background: #27ae60; color: white; margin: 5px; text-decoration: none; padding: 10px 15px; border-radius: 5px;'>📝 Metin Yönetimini Düzelt</a>";
+        echo "</div>";
         echo "</div>";
         
         $success_messages[] = "Tüm yeni özellikler başarıyla kuruldu!";
@@ -292,6 +296,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['install_features'])) {
                     </button>
                 </div>
             </form>
+            
+            <div class="text-center mt-4">
+                <h5 class="text-light mb-3">🔧 Sorun Giderme Araçları</h5>
+                <div class="d-flex justify-content-center flex-wrap gap-2">
+                    <a href="fix_content_sections.php" class="btn btn-outline-danger">
+                        <i class="fas fa-tools me-1"></i>İçerik Bölümlerini Düzelt
+                    </a>
+                    <a href="fix_text_management.php" class="btn btn-outline-success">
+                        <i class="fas fa-font me-1"></i>Metin Yönetimini Düzelt
+                    </a>
+                </div>
+                <small class="text-muted d-block mt-2">
+                    Bu araçları kullanarak mevcut verilerinizi yeni sisteme aktarabilirsiniz
+                </small>
+            </div>
             <?php endif; ?>
             
             <div class="text-center mt-4">

@@ -42,6 +42,12 @@
 3. Açılan sayfada **"Yeni Özellikleri Kur"** butonuna tıklayın
 4. Kurulum otomatik olarak tamamlanacak
 
+### 2. Sorun Giderme (Önemli!)
+Kurulumdan sonra şu adımları da yapın:
+1. **İçerik Bölümlerini Düzelt:** `admin/fix_content_sections.php`
+2. **Metin Yönetimini Düzelt:** `admin/fix_text_management.php`
+3. Bu sayfalar mevcut verilerinizi yeni sisteme aktaracak
+
 ### 2. Veritabanı Tabloları
 Kurulum şu tabloları oluşturacak:
 - `admin_roles` - Admin rolleri
@@ -95,6 +101,8 @@ admin/
 ├── content-ordering.php         # İçerik sıralama sistemi
 ├── text-management.php          # Site metin yönetimi
 ├── setup_new_features.php       # Kurulum sayfası
+├── fix_content_sections.php     # İçerik bölümleri düzeltme
+├── fix_text_management.php      # Metin yönetimi düzeltme
 └── includes/
     └── header.php              # Güncellenmiş menü
 ```
