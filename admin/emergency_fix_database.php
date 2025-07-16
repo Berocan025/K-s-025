@@ -210,6 +210,34 @@ try {
         echo "<span class='success'>✅ " . count($faq_texts) . " FAQ metni eklendi</span><br>";
     }
     
+    // 5. İstatistik değerlerini kontrol et ve ekle - Developer: BERAT K
+    echo "<h3>📊 İstatistik değerlerini kontrol ediyorum...</h3>";
+    
+    $stat_defaults = [
+        'stat_projects' => '150',
+        'stat_clients' => '85',
+        'stat_years' => '5',
+        'stat_awards' => '12',
+        'stat_projects_label' => 'Başarılı Platform',
+        'stat_clients_label' => 'Mutlu Müşteri',
+        'stat_years_label' => 'Yıl Deneyim',
+        'stat_awards_label' => 'Ödül & Başarı'
+    ];
+    
+    foreach ($stat_defaults as $key => $value) {
+        $stmt = $pdo->prepare("SELECT setting_value FROM settings WHERE setting_key = ?");
+        $stmt->execute([$key]);
+        $existing = $stmt->fetchColumn();
+        
+        if ($existing === false || $existing === null || $existing === '') {
+            $stmt = $pdo->prepare("INSERT OR REPLACE INTO settings (setting_key, setting_value) VALUES (?, ?)");
+            $stmt->execute([$key, $value]);
+            echo "<span class='success'>✅ $key = $value eklendi</span><br>";
+        } else {
+            echo "<span class='success'>✅ $key zaten mevcut ($existing)</span><br>";
+        }
+    }
+    
     echo "<h2 class='success'>🎉 VERİTABANI TAMİRİ TAMAMLANDI!</h2>";
     echo "<hr>";
     

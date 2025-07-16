@@ -32,7 +32,12 @@ $bulk_settings = loadBulkSettings($settings_keys);
 
 // Helper function to get content/settings from bulk loaded data
 function bc($key, $default = '') { global $bulk_content; return $bulk_content[$key] ?? $default; }
-function bs($key, $default = '') { global $bulk_settings; return $bulk_settings[$key] ?? $default; }
+function bs($key, $default = '') { 
+    global $bulk_settings; 
+    $value = $bulk_settings[$key] ?? $default;
+    // Return default if value is empty or null - Developer: BERAT K
+    return (!empty($value) && $value !== 'null') ? $value : $default;
+}
 
 // Get visible content sections for dynamic layout - Developer: BERAT K
 try {
@@ -134,11 +139,17 @@ foreach ($content_sections as $section) {
     <div class="container">
         <div class="row">
             <?php 
-            // Get stats from bulk loaded data
+            // Get stats from bulk loaded data with fallback - Developer: BERAT K
             $stat_projects = bs('stat_projects', '150');
             $stat_clients = bs('stat_clients', '85'); 
             $stat_years = bs('stat_years', '5');
             $stat_awards = bs('stat_awards', '12');
+            
+            // Emergency fallback if values are null/empty
+            if (empty($stat_projects) || $stat_projects === 'null') $stat_projects = '150';
+            if (empty($stat_clients) || $stat_clients === 'null') $stat_clients = '85';
+            if (empty($stat_years) || $stat_years === 'null') $stat_years = '5';
+            if (empty($stat_awards) || $stat_awards === 'null') $stat_awards = '12';
             ?>
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item animate-on-scroll">

@@ -15,6 +15,24 @@ $page_title = 'Dashboard';
 $missing_tables = checkRequiredTables();
 $emergency_mode = !empty($missing_tables);
 
+// Check stats values - Developer: BERAT K
+$stats_problem = false;
+$missing_stats = [];
+try {
+    $stat_keys = ['stat_projects', 'stat_clients', 'stat_years', 'stat_awards'];
+    foreach ($stat_keys as $key) {
+        $stmt = $pdo->prepare("SELECT setting_value FROM settings WHERE setting_key = ?");
+        $stmt->execute([$key]);
+        $value = $stmt->fetchColumn();
+        if ($value === false || $value === null || $value === '') {
+            $missing_stats[] = $key;
+            $stats_problem = true;
+        }
+    }
+} catch (Exception $e) {
+    $stats_problem = true;
+}
+
 $stats = [
     'projects' => $pdo->query("SELECT COUNT(*) FROM projects")->fetchColumn(),
     'services' => $pdo->query("SELECT COUNT(*) FROM services")->fetchColumn(),
@@ -95,6 +113,34 @@ for ($i = 6; $i >= 0; $i--) {
     100% { transform: scale(1); }
 }
 </style>
+<?php endif; ?>
+
+<?php if ($stats_problem && !$emergency_mode): ?>
+<!-- İSTATİSTİK SORUNU UYARISI - Developer: BERAT K -->
+<div class="container-fluid px-4 mb-4">
+    <div class="alert alert-warning border-0 shadow-lg" style="background: linear-gradient(45deg, #f39c12, #e67e22); animation: pulse 2s infinite;">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h4 class="alert-heading text-white mb-2">
+                    <i class="fas fa-chart-bar fa-lg me-2"></i>
+                    📊 İSTATİSTİK SORUNU TESPİT EDİLDİ!
+                </h4>
+                <p class="text-white mb-2">
+                    <strong>SORUN:</strong> Ana sayfada istatistikler "null+" gösteriyor
+                </p>
+                <p class="text-white mb-0">
+                    <strong>Eksik değerler:</strong> <code><?php echo implode(', ', $missing_stats); ?></code>
+                </p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a href="fix_stats_counter.php" class="btn btn-light btn-lg fw-bold mb-2 d-block">
+                    <i class="fas fa-chart-bar me-2"></i>📊 İSTATİSTİKLERİ DÜZELT
+                </a>
+                <small class="text-white">Developer: BERAT K - R10</small>
+            </div>
+        </div>
+    </div>
+</div>
 <?php endif; ?>
 
 <div class="container-fluid px-4">

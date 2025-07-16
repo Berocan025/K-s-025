@@ -559,6 +559,12 @@
                         <span>🚨 ACİL DURUM TAMİR</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-info fw-bold <?php echo basename($_SERVER['PHP_SELF']) == 'fix_stats_counter.php' ? 'active' : ''; ?>" href="fix_stats_counter.php">
+                        <i class="fas fa-chart-bar text-info"></i>
+                        <span>📊 İSTATİSTİK TAMİR</span>
+                    </a>
+                </li>
                 
                 <!-- Yeni Özellikler - Developer: BERAT K -->
                 <li class="nav-item">
