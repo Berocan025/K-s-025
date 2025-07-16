@@ -1,0 +1,18 @@
+[15-Jul-2025 18:40:37 UTC] PHP Notice:  Undefined variable: pdo in /home/webtamfc/ksn.webtasarimci.app/includes/functions.php on line 1615
+[15-Jul-2025 18:40:37 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/webtamfc/ksn.webtasarimci.app/includes/functions.php:1615
+Stack trace:
+#0 /home/webtamfc/ksn.webtasarimci.app/admin/content-management.php(37): addSiteContent('stat_years_labe...', 'Y\xC4\xB1ll\xC4\xB1k Deneyi...', 'Y\xC4\xB1ll\xC4\xB1k Deneyi...', 'text', 'general')
+#1 {main}
+  thrown in /home/webtamfc/ksn.webtasarimci.app/includes/functions.php on line 1615
+[15-Jul-2025 18:40:57 UTC] PHP Notice:  Undefined variable: pdo in /home/webtamfc/ksn.webtasarimci.app/includes/functions.php on line 1615
+[15-Jul-2025 18:40:57 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/webtamfc/ksn.webtasarimci.app/includes/functions.php:1615
+Stack trace:
+#0 /home/webtamfc/ksn.webtasarimci.app/admin/content-management.php(37): addSiteContent('stat_years_labe...', 'Y\xC4\xB1ll\xC4\xB1k Deneyi...', 'Y\xC4\xB1ll\xC4\xB1k Deneyi...', 'text', 'home')
+#1 {main}
+  thrown in /home/webtamfc/ksn.webtasarimci.app/includes/functions.php on line 1615
+[15-Jul-2025 18:41:26 UTC] PHP Notice:  Undefined variable: pdo in /home/webtamfc/ksn.webtasarimci.app/includes/functions.php on line 1615
+[15-Jul-2025 18:41:26 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/webtamfc/ksn.webtasarimci.app/includes/functions.php:1615
+Stack trace:
+#0 /home/webtamfc/ksn.webtasarimci.app/admin/content-management.php(37): addSiteContent('stat_years_labe...', 'Y\xC4\xB1ll\xC4\xB1k Deneyi...', 'Y\xC4\xB1ll\xC4\xB1k Deneyi...', 'text', 'home')
+#1 {main}
+  thrown in /home/webtamfc/ksn.webtasarimci.app/includes/functions.php on line 1615

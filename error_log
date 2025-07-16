@@ -1,0 +1,4 @@
+[15-Jul-2025 18:09:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function updateSetting() in /home/webtamfc/ksn.webtasarimci.app/fix_content_management.php:242
+Stack trace:
+#0 {main}
+  thrown in /home/webtamfc/ksn.webtasarimci.app/fix_content_management.php on line 242

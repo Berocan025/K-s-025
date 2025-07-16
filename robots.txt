@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /uploads/debug.log
+Allow: /
+
+Sitemap: https://dnm.webtasarimci.app/sitemap.xml
