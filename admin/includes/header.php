@@ -552,10 +552,18 @@
                     </a>
                 </li>
                 
+                <!-- ACİL DURUM - Developer: BERAT K -->
+                <li class="nav-item">
+                    <a class="nav-link text-danger fw-bold blink <?php echo basename($_SERVER['PHP_SELF']) == 'emergency_fix_database.php' ? 'active' : ''; ?>" href="emergency_fix_database.php">
+                        <i class="fas fa-tools text-danger"></i>
+                        <span>🚨 ACİL DURUM TAMİR</span>
+                    </a>
+                </li>
+                
                 <!-- Yeni Özellikler - Developer: BERAT K -->
                 <li class="nav-item">
-                    <a class="nav-link text-danger fw-bold <?php echo basename($_SERVER['PHP_SELF']) == 'complete_fix_all_problems.php' ? 'active' : ''; ?>" href="complete_fix_all_problems.php">
-                        <i class="fas fa-magic text-danger"></i>
+                    <a class="nav-link text-warning fw-bold <?php echo basename($_SERVER['PHP_SELF']) == 'complete_fix_all_problems.php' ? 'active' : ''; ?>" href="complete_fix_all_problems.php">
+                        <i class="fas fa-magic text-warning"></i>
                         <span>🔧 TAM ÇÖZÜM</span>
                     </a>
                 </li>

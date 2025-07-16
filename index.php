@@ -35,7 +35,34 @@ function bc($key, $default = '') { global $bulk_content; return $bulk_content[$k
 function bs($key, $default = '') { global $bulk_settings; return $bulk_settings[$key] ?? $default; }
 
 // Get visible content sections for dynamic layout - Developer: BERAT K
-$content_sections = getVisibleContentSections();
+try {
+    $content_sections = getVisibleContentSections();
+    if (empty($content_sections)) {
+        // Fallback: Default sections if table is empty or missing
+        $content_sections = [
+            ['section_key' => 'hero_section'],
+            ['section_key' => 'stats_section'],
+            ['section_key' => 'services_section'],
+            ['section_key' => 'projects_section'],
+            ['section_key' => 'products_section'],
+            ['section_key' => 'blog_section'],
+            ['section_key' => 'why_choose_section'],
+            ['section_key' => 'contact_section']
+        ];
+    }
+} catch (Exception $e) {
+    // Emergency fallback if content_sections table doesn't exist
+    $content_sections = [
+        ['section_key' => 'hero_section'],
+        ['section_key' => 'stats_section'],
+        ['section_key' => 'services_section'],
+        ['section_key' => 'projects_section'],
+        ['section_key' => 'products_section'],
+        ['section_key' => 'blog_section'],
+        ['section_key' => 'why_choose_section'],
+        ['section_key' => 'contact_section']
+    ];
+}
 ?>
 
 <?php include 'includes/header.php'; ?>

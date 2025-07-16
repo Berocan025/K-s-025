@@ -1641,6 +1641,7 @@ function getContentSections() {
         $stmt->execute();
         return $stmt->fetchAll();
     } catch(PDOException $e) {
+        // Return empty array if table doesn't exist
         return [];
     }
 }
@@ -1655,6 +1656,7 @@ function getVisibleContentSections() {
         $stmt->execute();
         return $stmt->fetchAll();
     } catch(PDOException $e) {
+        // Return empty array if table doesn't exist
         return [];
     }
 }
@@ -1672,6 +1674,27 @@ function isSectionVisible($section_key) {
     } catch(PDOException $e) {
         return true; // Default: show section if error
     }
+}
+
+// Emergency database check function - Developer: BERAT K
+function checkRequiredTables() {
+    global $pdo;
+    if (!$pdo) {
+        require_once __DIR__ . '/../config/database.php';
+    }
+    
+    $required_tables = ['content_sections', 'text_categories', 'site_texts'];
+    $missing_tables = [];
+    
+    foreach ($required_tables as $table) {
+        try {
+            $stmt = $pdo->query("SELECT COUNT(*) FROM $table");
+        } catch (PDOException $e) {
+            $missing_tables[] = $table;
+        }
+    }
+    
+    return $missing_tables;
 }
 
 ?>

@@ -11,6 +11,10 @@ requireLogin();
 
 $page_title = 'Dashboard';
 
+// Emergency database check - Developer: BERAT K
+$missing_tables = checkRequiredTables();
+$emergency_mode = !empty($missing_tables);
+
 $stats = [
     'projects' => $pdo->query("SELECT COUNT(*) FROM projects")->fetchColumn(),
     'services' => $pdo->query("SELECT COUNT(*) FROM services")->fetchColumn(),
@@ -56,6 +60,42 @@ for ($i = 6; $i >= 0; $i--) {
 ?>
 
 <?php include 'includes/header.php'; ?>
+
+<?php if ($emergency_mode): ?>
+<!-- ACİL DURUM UYARISI - Developer: BERAT K -->
+<div class="container-fluid px-4 mb-4">
+    <div class="alert alert-danger border-0 shadow-lg" style="background: linear-gradient(45deg, #e74c3c, #c0392b); animation: pulse 2s infinite;">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h4 class="alert-heading text-white mb-2">
+                    <i class="fas fa-exclamation-triangle fa-lg me-2"></i>
+                    🚨 ACİL DURUM: VERİTABANI HATASI!
+                </h4>
+                <p class="text-white mb-2">
+                    <strong>SORUN:</strong> Eksik tablolar tespit edildi: <code><?php echo implode(', ', $missing_tables); ?></code>
+                </p>
+                <p class="text-white mb-0">
+                    <strong>ÇÖZÜM:</strong> Hemen aşağıdaki butona tıklayarak tabloları oluşturun.
+                </p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a href="emergency_fix_database.php" class="btn btn-light btn-lg fw-bold mb-2 d-block">
+                    <i class="fas fa-tools me-2"></i>🚨 HEMEN TAMİR ET
+                </a>
+                <small class="text-white">Developer: BERAT K - R10</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+</style>
+<?php endif; ?>
 
 <div class="container-fluid px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom border-secondary">
