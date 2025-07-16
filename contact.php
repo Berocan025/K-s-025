@@ -211,7 +211,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <section class="py-5" style="background: rgba(108, 92, 231, 0.05);">
     <div class="container">
-        <h2 class="section-title animate-on-scroll">Sıkça Sorulan Sorular</h2>
+        <h2 class="section-title animate-on-scroll"><?php echo getContentWithVariables('faq_title', 'Sıkça Sorulan Sorular'); ?></h2>
         
         <div class="row">
             <div class="col-lg-8 mx-auto">
@@ -219,13 +219,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="accordion-item animate-on-scroll">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                Proje süreci nasıl işliyor?
+                                <?php echo getContentWithVariables('faq_q1', 'Proje süreci nasıl işliyor?'); ?>
                             </button>
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                İlk olarak projenizi detaylı şekilde konuşuyoruz. Ardından teknik analiz yapıp size teklif sunuyorum. 
-                                Onay sonrası tasarım ve geliştirme sürecine başlıyoruz. Her aşamada sizinle iletişim halindeyim.
+                                <?php echo getContentWithVariables('faq_a1', 'İlk olarak projenizi detaylı şekilde konuşuyoruz. Ardından teknik analiz yapıp size teklif sunuyorum. Onay sonrası tasarım ve geliştirme sürecine başlıyoruz. Her aşamada sizinle iletişim halindeyim.'); ?>
                             </div>
                         </div>
                     </div>
@@ -233,13 +232,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="accordion-item animate-on-scroll">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                Proje teslim süresi ne kadar?
+                                <?php echo getContentWithVariables('faq_q2', 'Proje teslim süresi ne kadar?'); ?>
                             </button>
                         </h2>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Proje karmaşıklığına göre değişmekle birlikte, basit web siteleri 1-2 hafta, 
-                                e-ticaret siteleri 3-4 hafta, özel uygulamalar ise 6-8 hafta sürebilir.
+                                <?php echo getContentWithVariables('faq_a2', 'Proje karmaşıklığına göre değişmekle birlikte, basit web siteleri 1-2 hafta, e-ticaret siteleri 3-4 hafta, özel uygulamalar ise 6-8 hafta sürebilir.'); ?>
                             </div>
                         </div>
                     </div>
@@ -247,13 +245,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="accordion-item animate-on-scroll">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                Destek hizmeti veriyor musunuz?
+                                <?php echo getContentWithVariables('faq_q3', 'Destek hizmeti veriyor musunuz?'); ?>
                             </button>
                         </h2>
                         <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Evet! Tüm projelerimde 6 ay ücretsiz teknik destek veriyorum. 
-                                Bu süre sonrasında uygun fiyatlarla destek hizmeti devam ediyor.
+                                <?php echo getContentWithVariables('faq_a3', 'Evet! Tüm projelerimde 6 ay ücretsiz teknik destek veriyorum. Bu süre sonrasında uygun fiyatlarla destek hizmeti devam ediyor.'); ?>
                             </div>
                         </div>
                     </div>
@@ -261,13 +258,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="accordion-item animate-on-scroll">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                Hangi teknolojileri kullanıyorsunuz?
+                                <?php echo getContentWithVariables('faq_q4', 'Hangi teknolojileri kullanıyorsunuz?'); ?>
                             </button>
                         </h2>
                         <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                HTML5, CSS3, JavaScript, PHP, React, Vue.js, Laravel, Node.js gibi modern teknolojileri kullanıyorum. 
-                                Projenizin ihtiyacına göre en uygun teknoloji stack'ini seçiyoruz.
+                                <?php echo getContentWithVariables('faq_a4', 'HTML5, CSS3, JavaScript, PHP, React, Vue.js, Laravel, Node.js gibi modern teknolojileri kullanıyorum. Projenizin ihtiyacına göre en uygun teknoloji stack\'ini seçiyoruz.'); ?>
                             </div>
                         </div>
                     </div>

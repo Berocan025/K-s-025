@@ -1630,4 +1630,48 @@ function deleteSiteContent($id) {
     }
 }
 
+// Content Sections Functions - Developer: BERAT K
+function getContentSections() {
+    global $pdo;
+    if (!$pdo) {
+        require_once __DIR__ . '/../config/database.php';
+    }
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM content_sections WHERE is_active = 1 ORDER BY sort_order ASC");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch(PDOException $e) {
+        return [];
+    }
+}
+
+function getVisibleContentSections() {
+    global $pdo;
+    if (!$pdo) {
+        require_once __DIR__ . '/../config/database.php';
+    }
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM content_sections WHERE is_active = 1 AND is_visible = 1 ORDER BY sort_order ASC");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch(PDOException $e) {
+        return [];
+    }
+}
+
+function isSectionVisible($section_key) {
+    global $pdo;
+    if (!$pdo) {
+        require_once __DIR__ . '/../config/database.php';
+    }
+    try {
+        $stmt = $pdo->prepare("SELECT is_visible FROM content_sections WHERE section_key = ? AND is_active = 1");
+        $stmt->execute([$section_key]);
+        $result = $stmt->fetchColumn();
+        return $result == 1;
+    } catch(PDOException $e) {
+        return true; // Default: show section if error
+    }
+}
+
 ?>

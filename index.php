@@ -4,6 +4,7 @@
  * Developer: BERAT K - R10
  * Website: Portfolio Management System
  * Created by: BERAT K - R10
+ * Updated: Dynamic content sections support
  */
 
 require_once 'includes/functions.php';
@@ -32,10 +33,21 @@ $bulk_settings = loadBulkSettings($settings_keys);
 // Helper function to get content/settings from bulk loaded data
 function bc($key, $default = '') { global $bulk_content; return $bulk_content[$key] ?? $default; }
 function bs($key, $default = '') { global $bulk_settings; return $bulk_settings[$key] ?? $default; }
+
+// Get visible content sections for dynamic layout - Developer: BERAT K
+$content_sections = getVisibleContentSections();
 ?>
 
 <?php include 'includes/header.php'; ?>
 
+<?php
+// Render sections dynamically based on content_sections table - Developer: BERAT K
+foreach ($content_sections as $section) {
+    $section_key = $section['section_key'];
+    
+    switch ($section_key) {
+        case 'hero_section':
+            ?>
 <section class="hero-section">
     <div class="container">
         <div class="row justify-content-center text-center">
@@ -86,7 +98,11 @@ function bs($key, $default = '') { global $bulk_settings; return $bulk_settings[
         </div>
     </div>
 </section>
-
+            <?php
+            break;
+        
+        case 'stats_section':
+            ?>
 <section class="stats-section">
     <div class="container">
         <div class="row">
@@ -99,39 +115,55 @@ function bs($key, $default = '') { global $bulk_settings; return $bulk_settings[
             ?>
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item animate-on-scroll">
-                    <span class="stat-number" data-count="<?php echo htmlspecialchars($stat_projects); ?>">0+</span>
-                    <div class="stat-label"><?php echo bc('', 'Aktif Platform'); ?></div>
+                    <div class="stat-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="stat-number"><?php echo $stat_projects; ?>+</div>
+                    <div class="stat-label"><?php echo bc('stat_projects_label', 'Başarılı Platform'); ?></div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item animate-on-scroll">
-                    <span class="stat-number" data-count="<?php echo htmlspecialchars($stat_clients); ?>">0M+</span>
-                    <div class="stat-label"><?php echo bc('', 'Aktif Oyun'); ?></div>
+                    <div class="stat-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="stat-number"><?php echo $stat_clients; ?>+</div>
+                    <div class="stat-label"><?php echo bc('stat_clients_label', 'Mutlu Müşteri'); ?></div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item animate-on-scroll">
-                    <span class="stat-number" data-count="<?php echo htmlspecialchars($stat_years); ?>">0+</span>
-                    <div class="stat-label"><?php echo bc('', 'Yıllık Deneyim'); ?></div>
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-number"><?php echo $stat_years; ?>+</div>
+                    <div class="stat-label"><?php echo bc('stat_years_label', 'Yıl Deneyim'); ?></div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item animate-on-scroll">
-                    <span class="stat-number" data-count="<?php echo htmlspecialchars($stat_awards); ?>">0+</span>
-                    <div class="stat-label"><?php echo bc('', 'Endüstri Ödülü'); ?></div>
+                    <div class="stat-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="stat-number"><?php echo $stat_awards; ?>+</div>
+                    <div class="stat-label"><?php echo bc('stat_awards_label', 'Ödül & Başarı'); ?></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
+            <?php
+            break;
+        
+        case 'services_section':
+            ?>
 <section class="py-5">
     <div class="container">
-                    <h2 class="section-title animate-on-scroll"><?php echo bc('services_section_title', 'Platform Hizmetlerim'); ?></h2>
+        <h2 class="section-title animate-on-scroll"><?php echo bc('services_section_title', 'Platform Hizmetlerim'); ?></h2>
         
         <div class="row">
             <?php
-            $services = getServices(6);
+            $services = getServices(3);
             if (!empty($services)):
                 foreach ($services as $service):
             ?>
@@ -183,14 +215,18 @@ function bs($key, $default = '') { global $bulk_settings; return $bulk_settings[
         </div>
         
         <div class="text-center mt-4">
-                            <a href="services.php" class="btn btn-gradient"><?php echo bc('btn_all_services', 'Tüm Platform Hizmetleri'); ?></a>
+            <a href="services.php" class="btn btn-gradient"><?php echo bc('btn_all_services', 'Tüm Platform Hizmetleri'); ?></a>
         </div>
     </div>
 </section>
-
+            <?php
+            break;
+        
+        case 'projects_section':
+            ?>
 <section class="py-5" style="background: rgba(220, 38, 38, 0.05);">
     <div class="container">
-                    <h2 class="section-title animate-on-scroll"><?php echo bc('projects_section_title', 'Platformlarım'); ?></h2>
+        <h2 class="section-title animate-on-scroll"><?php echo bc('projects_section_title', 'Platformlarım'); ?></h2>
         
         <div class="row">
             <?php
@@ -244,7 +280,11 @@ function bs($key, $default = '') { global $bulk_settings; return $bulk_settings[
         <?php endif; ?>
     </div>
 </section>
-
+            <?php
+            break;
+        
+        case 'products_section':
+            ?>
 <section class="py-5">
     <div class="container">
         <h2 class="section-title animate-on-scroll">Premium Ürünlerim</h2>
@@ -299,8 +339,12 @@ function bs($key, $default = '') { global $bulk_settings; return $bulk_settings[
         <?php endif; ?>
     </div>
 </section>
-
-            <?php if(bs('blog_enabled', '1') == '1'): ?>
+            <?php
+            break;
+        
+        case 'blog_section':
+            if(bs('blog_enabled', '1') == '1'):
+            ?>
 <section class="py-5" style="background: rgba(220, 38, 38, 0.05);">
     <div class="container">
         <h2 class="section-title animate-on-scroll">Platform Haberleri</h2>
@@ -379,9 +423,12 @@ function bs($key, $default = '') { global $bulk_settings; return $bulk_settings[
         <?php endif; ?>
     </div>
 </section>
-<?php endif; ?>
-
-<!-- Why Choose Us Section -->
+            <?php
+            endif;
+            break;
+        
+        case 'why_choose_section':
+            ?>
 <section class="py-5" style="background: rgba(220, 38, 38, 0.03);">
     <div class="container">
         <div class="row">
@@ -432,7 +479,11 @@ function bs($key, $default = '') { global $bulk_settings; return $bulk_settings[
         </div>
     </div>
 </section>
-
+            <?php
+            break;
+        
+        case 'contact_section':
+            ?>
 <section class="py-5" style="background: var(--dark-card);">
     <div class="container">
         <div class="row align-items-center">
@@ -446,6 +497,11 @@ function bs($key, $default = '') { global $bulk_settings; return $bulk_settings[
         </div>
     </div>
 </section>
+            <?php
+            break;
+    }
+}
+?>
 
 <style>
 /* Blog Cards for Homepage */

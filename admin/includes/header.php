@@ -554,6 +554,12 @@
                 
                 <!-- Yeni Özellikler - Developer: BERAT K -->
                 <li class="nav-item">
+                    <a class="nav-link text-danger fw-bold <?php echo basename($_SERVER['PHP_SELF']) == 'complete_fix_all_problems.php' ? 'active' : ''; ?>" href="complete_fix_all_problems.php">
+                        <i class="fas fa-magic text-danger"></i>
+                        <span>🔧 TAM ÇÖZÜM</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'admin-users.php' ? 'active' : ''; ?>" href="admin-users.php">
                         <i class="fas fa-users-cog"></i>
                         <span>Admin Kullanıcıları</span>
